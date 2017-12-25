@@ -11,8 +11,8 @@ void main() {
 		cur2++;
 		RowColWeight r;
 		in >> r.col >> r.weight >> r.row;
-		n[r.col - 1].name = r.col--;
-		n[r.row - 1].name = r.row--;
+		n[r.col - 1].num = r.col--;
+		n[r.row - 1].num = r.row--;
 		if (r.row > i)i = r.row;
 		q.push(r);
 	}
@@ -27,7 +27,7 @@ void main() {
 	Graphlnk g;
 	CreatGraph(g, n, i+1, r, cur2);
 	cout << g;
-	cout << "1.É¾³ý" << endl;
+	cout << "1.åˆ é™¤" << endl;
 	int t;
 	cin >> t;
 	g.removeVertex(t);
