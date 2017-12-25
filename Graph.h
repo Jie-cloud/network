@@ -5,7 +5,7 @@
 #include<iomanip>
 #include<fstream>
 const int maxWeight = 1000;
-const int MaxVeitices = 10;			//´ú±í×î´ó¶¥µãÊı =n
+const int MaxVeitices = 10;			//ä»£è¡¨æœ€å¤§é¡¶ç‚¹æ•° =n
 
 class Graph
 {
@@ -28,15 +28,15 @@ public:
 			return true;
 		else return false;
 	}
-	int NumberOfVertices() { return numVertices; }		//·µ»Øµ±Ç°¶¥µãÊı
-	int NunberOfEdges() { return numEdges; }			//·µ»Øµ±Ç°±ßÊı
-	virtual int getWeight(int v1, int v2) = 0;					//È¡±ß£¨v1£¬v2£©ÉÏµÄÈ¨Öµ
-	virtual int getFirstNeighbor(int v) = 0;				//È¡¶¥µãvµÄµÚ¸öÁÚ½Ó¶¥µã
-	virtual int getNextNeighbor(int v, int w) = 0;			//È¡ÁÚ½Ó¶¥µãwµÄÏÂÒ»¸öÁÚ½Ó¶¥µã
-	//virtual bool insertVertex(const string vertex) = 0;			//²åÈëÒ»¸ö¶¥µãvertex
-	virtual bool insertEdge(int v1, int v2, int cost) = 0;		//²åÈë±ß(v1,v2),È¨Îªcost
-	virtual bool removeVertex(int v) = 0;					//É¾È¥¶¥µãvºÍËùÓĞÓëvÏà¹ØµÄ±ß
-	virtual bool removeEdge(int v1, int v2) = 0;				//É¾È¥±ß(v1,v2)
+	int NumberOfVertices() { return numVertices; }		//è¿”å›å½“å‰é¡¶ç‚¹æ•°
+	int NunberOfEdges() { return numEdges; }			//è¿”å›å½“å‰è¾¹æ•°
+	virtual int getWeight(int v1, int v2) = 0;					//å–è¾¹ï¼ˆv1ï¼Œv2ï¼‰ä¸Šçš„æƒå€¼
+	virtual int getFirstNeighbor(int v) = 0;				//å–é¡¶ç‚¹vçš„ç¬¬ä¸ªé‚»æ¥é¡¶ç‚¹
+	virtual int getNextNeighbor(int v, int w) = 0;			//å–é‚»æ¥é¡¶ç‚¹wçš„ä¸‹ä¸€ä¸ªé‚»æ¥é¡¶ç‚¹
+	virtual bool insertVertex(const int vertex) = 0;			//æ’å…¥ä¸€ä¸ªé¡¶ç‚¹vertex
+	virtual bool insertEdge(int v1, int v2, int cost) = 0;		//æ’å…¥è¾¹(v1,v2),æƒä¸ºcost
+	virtual bool removeVertex(int v) = 0;					//åˆ å»é¡¶ç‚¹vå’Œæ‰€æœ‰ä¸vç›¸å…³çš„è¾¹
+	virtual bool removeEdge(int v1, int v2) = 0;				//åˆ å»è¾¹(v1,v2)
 protected:
 	int maxVertices;
 	int numEdges;
