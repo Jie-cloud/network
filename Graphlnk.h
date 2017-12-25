@@ -9,7 +9,7 @@ struct Edge {    //路由器
 };
 
 struct Vertex {
-	int num;   //yes
+	int num;   //yesnodojflkdjf
 	Edge * adj;   //头指针
 };
 
