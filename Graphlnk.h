@@ -2,43 +2,43 @@
 #include"Graph.h"
 using namespace std;
 
-struct Edge {    //Â·ÓÉÆ÷
-	int dest;    //ÏÂÒ»¸ö¶¥µã
-	int cost;    //±ßµÄÈ¨Öµ 
-	Edge * link;  //ÏÂÒ»Ìõ±ß
+struct Edge {    //è·¯ç”±å™¨
+	int dest;    //ä¸‹ä¸€ä¸ªé¡¶ç‚¹
+	int cost;    //è¾¹çš„æƒå€¼ 
+	Edge * link;  //ä¸‹ä¸€æ¡è¾¹
 };
 
 struct Vertex {
-	string name;
-	Edge * adj;   //Í·Ö¸Õë
+	int num;
+	Edge * adj;   //å¤´æŒ‡é’ˆ
 };
 
 struct RowColWeight
 {
-	int row = -1;							//ÐÐÏÂ±ê
-	int col = -1;							//ÁÐÏÂ±ê
-	int weight = 0;							//È¨Öµ
+	int row = -1;							//è¡Œä¸‹æ ‡
+	int col = -1;							//åˆ—ä¸‹æ ‡
+	int weight = 0;							//æƒå€¼
 };
 
 struct node {
-	string name;
+	int num;
 };
 
 class Graphlnk :public Graph {
 public:
 	Graphlnk(int sz);
 	~Graphlnk() {};
-	void getValue(int i,string& s) {
+	int getValue(int i) {
 		if (i >= 0 && i < numVertices)
-			s = Nodeintable[i].name;
+			return Nodeintable[i].num;
 	}
-	int getWeight(int v1, int v2);					//È¡±ß£¨v1£¬v2£©ÉÏµÄÈ¨Öµ
-	int getFirstNeighbor(int v);				//È¡¶¥µãvµÄµÚ¸öÁÚ½Ó¶¥µã
-	int getNextNeighbor(int v, int w);			//È¡ÁÚ½Ó¶¥µãwµÄÏÂÒ»¸öÁÚ½Ó¶¥µã
-	bool insertVertex(const string vertex);			//²åÈëÒ»¸ö¶¥µãvertex
-	bool insertEdge(int v1, int v2, int cost);		//²åÈë±ß(v1,v2),È¨Îªcost
-	bool removeVertex(int v);					//É¾È¥¶¥µãvºÍËùÓÐÓëvÏà¹ØµÄ±ß
-	bool removeEdge(int v1, int v2);				//É¾È¥±ß(v1,v2)
+	int getWeight(int v1, int v2);					//å–è¾¹ï¼ˆv1ï¼Œv2ï¼‰ä¸Šçš„æƒå€¼
+	int getFirstNeighbor(int v);				//å–é¡¶ç‚¹vçš„ç¬¬ä¸ªé‚»æŽ¥é¡¶ç‚¹
+	int getNextNeighbor(int v, int w);			//å–é‚»æŽ¥é¡¶ç‚¹wçš„ä¸‹ä¸€ä¸ªé‚»æŽ¥é¡¶ç‚¹
+	bool insertVertex(const int vertex);			//æ’å…¥ä¸€ä¸ªé¡¶ç‚¹vertex
+	bool insertEdge(int v1, int v2, int cost);		//æ’å…¥è¾¹(v1,v2),æƒä¸ºcost
+	bool removeVertex(int v);					//åˆ åŽ»é¡¶ç‚¹vå’Œæ‰€æœ‰ä¸Žvç›¸å…³çš„è¾¹
+	bool removeEdge(int v1, int v2);				//åˆ åŽ»è¾¹(v1,v2)
 	Vertex * Nodeintable;
 };
 Graphlnk::Graphlnk(int sz = MaxVeitices) {
@@ -58,7 +58,7 @@ Graphlnk::Graphlnk(int sz = MaxVeitices) {
 	//NodeTable = new  struct Vertex<T,E>[maxVertices];
 	//if(NodeTable = NULL)
 	//{
-	//	cerr << "´æ´¢·ÖÅä´íÎó£¡"<<endl;
+	//	cerr << "å­˜å‚¨åˆ†é…é”™è¯¯ï¼"<<endl;
 	//	exit(1);
 	//}
 	for (int i = 0; i<maxVertices; i++)
@@ -108,10 +108,10 @@ int Graphlnk::getWeight(int v1, int v2)
 	}
 }
 
-bool Graphlnk::insertVertex(const string vertex)
+bool Graphlnk::insertVertex(const int vertex)
 {
 	if (numVertices == maxVertices) return false;
-	Nodeintable[numVertices].name = vertex;
+	Nodeintable[numVertices].num = vertex;
 	numVertices++;
 	return true;
 }
@@ -143,7 +143,7 @@ bool Graphlnk::removeVertex(int v)
 		numEdges--;
 	}
 	numVertices--;
-	Nodeintable[v].name = Nodeintable[numVertices].name;
+	Nodeintable[v].num = Nodeintable[numVertices].num;
 	p = Nodeintable[v].adj = Nodeintable[numVertices].adj;
 	while (p != NULL)
 	{
@@ -244,16 +244,15 @@ bool Graphlnk::removeEdge(int v1, int v2)
 ostream& operator << (ostream& out, Graphlnk & G)
 {
 	int i, j;
-	cout << "    Â·ÓÉÆ÷¸öÊýÎª:" << G.NumberOfVertices() << endl;
-	cout << "    Â·ÓÉÆ÷±ß¸öÊýÎª:" << G.NunberOfEdges() << endl;
-	cout << "    Â·ÓÉÆ÷±àºÅ" << endl;
+	cout << "    è·¯ç”±å™¨ä¸ªæ•°ä¸º:" << G.NumberOfVertices() << endl;
+	cout << "    è·¯ç”±å™¨è¾¹ä¸ªæ•°ä¸º:" << G.NunberOfEdges() << endl;
+	cout << "    è·¯ç”±å™¨ç¼–å·" << endl;
 	for (i = 0; i < G.NumberOfVertices(); i++) {
 		cout << "    "; string s;
-		G.getValue(i, s);
-		cout << setw(10) << s << endl;
+		cout << setw(10) << G.getValue(i) << endl;
 	}
 	cout << "\n";
-	cout << "    ¾àÀë¼¯ºÏÎª:\n";
+	cout << "    è·ç¦»é›†åˆä¸º:\n";
 	for (i = 0; i < G.NumberOfVertices(); i++)
 	{
 		cout << "   ";
@@ -271,14 +270,14 @@ ostream& operator << (ostream& out, Graphlnk & G)
 }
 
 void CreatGraph(Graphlnk &G, node N[], int n, RowColWeight E[], int e)
-{	//ÔÚÍ¼GÖÐ²åÈën¸ö¶¥µãVºÍeÌõ±ßE
+{	//åœ¨å›¾Gä¸­æ’å…¥nä¸ªé¡¶ç‚¹Vå’Œeæ¡è¾¹E
 
-	//ÔÚÍ¼GÖÐ²åÈën¸ö¶¥µã
+	//åœ¨å›¾Gä¸­æ’å…¥nä¸ªé¡¶ç‚¹
 	for (int i = 0; i < n; i++) {		
-		G.insertVertex(N[i].name);
+		G.insertVertex(N[i].num);
 	}
 
-	//ÔÚÍ¼GÖÐ²åÈëeÌõ±ß
+	//åœ¨å›¾Gä¸­æ’å…¥eæ¡è¾¹
 	for (int k = 0; k < e; k++) {
 		G.insertEdge(E[k].row, E[k].col, E[k].weight);
 	}
