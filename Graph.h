@@ -36,7 +36,6 @@ public:
 	virtual bool insertEdge(int v1, int v2, int cost) = 0;		//插入边(v1,v2),权为cost
 	virtual bool removeVertex(int v) = 0;					//删去顶点v和所有与v相关的边
 	virtual bool removeEdge(int v1, int v2) = 0;				//删去边(v1,v2)
-protected:
 	int maxVertices;
 	int numEdges;
 	int numVertices;

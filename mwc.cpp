@@ -1,5 +1,7 @@
 #include"Graphlnk.h"
-Graphlnk::Graphlnk(int sz = MaxVeitices) {
+
+Graphlnk::Graphlnk() {
+	int sz = MaxVeitices;
 	maxVertices = sz;
 	numVertices = 0;
 	numEdges = 0;
@@ -26,6 +28,8 @@ Graphlnk::Graphlnk(int sz = MaxVeitices) {
 	}
 };
 
+
+
 int Graphlnk::getFirstNeighbor(int v) {
 	if (v != -1)
 	{
@@ -34,6 +38,7 @@ int Graphlnk::getFirstNeighbor(int v) {
 	}
 	return -1;
 }
+
 
 int Graphlnk::getNextNeighbor(int v, int w)
 {
@@ -48,4 +53,17 @@ int Graphlnk::getNextNeighbor(int v, int w)
 			return p->link->dest;
 	}
 	return -1;
+}
+
+
+int merge(int t1, Graphlnk g)
+{
+	int j;
+	for (j = 0; j < g.numVertices; j++) {
+		if (g.Nodeintable[j].num == t1) {
+			t1 = j;
+			break;
+		}
+	}
+		return t1;
 }

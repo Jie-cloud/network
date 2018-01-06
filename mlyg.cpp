@@ -62,7 +62,7 @@ int Graphlnk::getWeight(int v1, int v2)
 	else return maxWeight;
 }
 
-bool Graphlnk::insertVertex(const int vertex)
+bool Graphlnk::insertVertex( int vertex)
 {
 	if (numVertices == maxVertices) return false;
 	Nodeintable[numVertices].num = vertex;
