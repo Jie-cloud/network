@@ -1,29 +1,32 @@
 #pragma once
 #include"Graph.h"
+#include<queue>
+#include<stack>
 using namespace std;
-
+#define maxSize 1000
+struct Dist {
+	int dest;      //上一个路由器位置
+	int con = 0;   //标志位
+	int weight = 0;
+};
 struct Edge {    //路由器
 	int dest;    //下一个顶点
 	int cost;    //边的权值 
 	Edge * link;  //下一条边
 };
-
 struct Vertex {
 	int num;   //yesnodojflkdjf
 	Edge * adj;   //头指针
 };
-
 struct RowColWeight
 {
 	int row = -1;							//行下标
 	int col = -1;							//列下标
 	int weight = 0;							//权值
 };
-
 struct node {
 	int num;
 };
-
 class Graphlnk :public Graph {
 public:
 	Graphlnk(int sz);
@@ -35,6 +38,7 @@ public:
 	bool insertEdge(int v1, int v2, int cost);		//插入边(v1,v2),权为cost
 	bool removeVertex(int v);					//删去顶点v和所有与v相关的边
 	bool removeEdge(int v1, int v2);				//删去边(v1,v2)
+	void shortest(int v);                    //输出v1路由表
 	Vertex * Nodeintable;
 };
 /*Graphlnk::Graphlnk(int sz = MaxVeitices) {
@@ -86,7 +90,6 @@ int Graphlnk::getNextNeighbor(int v, int w)
 	}
 	return -1;
 }*/
-
 /*int Graphlnk::getWeight(int v1, int v2)
 {
 	if (v1 != -1 && v2 != -1)
@@ -111,7 +114,6 @@ bool Graphlnk::insertVertex(const int vertex)
 	numVertices++;
 	return true;
 }*/
-
 /*bool Graphlnk::removeVertex(int v)
 {
 	if (numVertices == 1 || v<0 || v >= numVertices)return false;
@@ -162,8 +164,7 @@ bool Graphlnk::insertVertex(const int vertex)
 	Nodeintable[k + 1].num = cur;
 	}
 	}*/
-
-	/*return true;
+/*return true;
 }
 
 
@@ -192,7 +193,6 @@ bool Graphlnk::insertEdge(int v1, int v2, int cost)
 	}
 	return false;
 }*/
-
 /*bool Graphlnk::removeEdge(int v1, int v2)
 {
 if (v1 != -1 && v2 != -1)
@@ -237,9 +237,7 @@ return true;
 }
 return false;
 }*/
-
 ostream& operator << (ostream& out, Graphlnk & G);
-
 /*void CreatGraph(Graphlnk &G, node N[], int n, RowColWeight E[], int e)
 {	//在图G中插入n个顶点V和e条边E
 

@@ -89,3 +89,87 @@ int Graphlnk::getValue(int i) {
 		return Nodeintable[i].num;
 	else return -1;
 }
+
+void Graphlnk::shortest(int v) {
+	cout << "请输入路由表编号:";
+	int name1, name2;
+	cin >> name1 >> name2;
+	Dist d[30];
+	int a[30][30] = { 0 };
+	int i; int from; int to;
+	for (i = 0; Nodeintable[i].num != name2; i++); to = i;
+	for (i = 0; Nodeintable[i].num != name1; i++); from = i;
+	//cout << "hello1" << endl;
+	while (d[to].con != 1) {
+		int j = getFirstNeighbor(i);
+		while (j != -1) {
+			if (a[i][j] != 0)break;
+			else {
+				a[i][j] = 1;
+				a[j][i] = 1;
+			}
+			int w = getWeight(i, j);
+			d[j].dest = i;
+			if (i == from)
+				d[j].weight = w;
+			else {
+				int k = i;
+				while (k != from) {
+					w += d[k].weight;
+					k = d[k].dest;
+				}
+				if (d[j].weight > w || d[j].weight == 0) {
+					d[j].weight = w;
+					d[j].dest = i;
+				}
+			}
+			break;
+		}
+		j = getNextNeighbor(i, j);
+		while (j != -1) {
+			if (a[i][j] != 0) {
+				j = getNextNeighbor(i, j);
+				continue;
+			}
+			else {
+				a[i][j] = 1;
+				a[j][i] = 1;
+			}
+			int w = getWeight(i, j);
+			d[j].dest = i;
+			if (i == from)
+				d[j].weight = w;
+			else {
+				int k = i;
+				while (k != from) {
+					w += d[k].weight;
+					k = d[k].dest;
+				}
+				if (d[j].weight > w || d[j].weight == 0) {
+					d[j].weight = w;
+					d[j].dest = i;
+				}
+			}
+			j = getNextNeighbor(i, j);
+		}
+		int min = 100;
+		for (int m = 0; m < 30; m++) {
+			if (d[m].weight < min&&d[m].weight>0 && d[m].con != 1) {
+				min = d[m].weight; i = m;
+			}
+		}
+		d[i].con = 1;
+	}
+	stack<int> s;
+	while (to != from) {
+		s.push(to);
+		to = d[to].dest;
+	}s.push(from);
+	cout << "             ";
+	while (s.size() != 1) {
+		cout << Nodeintable[s.top()].num << " --> ";
+		s.pop();
+	}
+	cout << Nodeintable[s.top()].num << endl;
+	cout << "             " << left << "-----------------------------------------------------------------" << endl;
+}

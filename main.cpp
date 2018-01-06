@@ -1,4 +1,6 @@
 #include"Graphlnk.h"
+#include"cover.h"
+#include"shortest.h"
 #include<queue>
 void main() {
 	node *n = new node[10];
@@ -47,24 +49,36 @@ void main() {
 		r[j++].weight = q.front().weight;
 		q.pop();
 	}
-	Graphlnk g;
+	Graphlnk g(100);
 	CreatGraph(g, n, i, r, cur2);
 	cout << g;
-	cout << "1.删除路由器边的编号" << endl;
-	int t1,t2;
-	cin >> t1 >> t2;
+	cout << "0.输入路由器的编号，输出最短路径" << endl; int t; cin >> t;
 	for (j = 0; j < i; j++) {
-		if (n[j].num == t1) {
-			t1 = j;
+		if (g.Nodeintable[j].num == t) {
+			t = j;
 			break;
 		}
 	}
-	for (j = 0; j < i; j++) {
-		if (n[j].num == t2) {
-			t2 = j;
-			break;
+	Path(g, t);
+	while (1) {
+        cout << "1.删除路由器边的编号" << endl;
+	    int t1, t2;
+		cin >> t1 >> t2;
+		for (j = 0; j < i; j++) {
+			if (g.Nodeintable[j].num == t1) {
+				t1 = j;
+				break;
+			}
 		}
+		for (j = 0; j < i; j++) {
+			if (g.Nodeintable[j].num == t2) {
+				t2 = j;
+				break;
+			}
+		}
+		g.removeEdge(t1, t2);
+		cout << g;
 	}
-	g.removeEdge(t1,t2);
-	cout << g;
 }
+
+
