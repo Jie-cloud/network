@@ -27,11 +27,7 @@ struct node {
 class Graphlnk :public Graph {
 public:
 	Graphlnk(int sz);
-	~Graphlnk() {};
-	int getValue(int i) {
-		if (i >= 0 && i < numVertices)
-			return Nodeintable[i].num;
-	}
+	int getValue(int i);
 	int getWeight(int v1, int v2);					//取边（v1，v2）上的权值
 	int getFirstNeighbor(int v);				//取顶点v的第个邻接顶点
 	int getNextNeighbor(int v, int w);			//取邻接顶点w的下一个邻接顶点
@@ -41,7 +37,7 @@ public:
 	bool removeEdge(int v1, int v2);				//删去边(v1,v2)
 	Vertex * Nodeintable;
 };
-Graphlnk::Graphlnk(int sz = MaxVeitices) {
+/*Graphlnk::Graphlnk(int sz = MaxVeitices) {
 	maxVertices = sz;
 	numVertices = 0;
 	numEdges = 0;
@@ -66,8 +62,8 @@ Graphlnk::Graphlnk(int sz = MaxVeitices) {
 		Nodeintable[i].adj = NULL;
 		//	NodeTable[i].adj->cost = maxWeight;
 	}
-};
-int Graphlnk::getFirstNeighbor(int v) {
+};*/
+/*int Graphlnk::getFirstNeighbor(int v) {
 	if (v != -1)
 	{
 		Edge * p = Nodeintable[v].adj;
@@ -89,9 +85,9 @@ int Graphlnk::getNextNeighbor(int v, int w)
 			return p->link->dest;
 	}
 	return -1;
-}
+}*/
 
-int Graphlnk::getWeight(int v1, int v2)
+/*int Graphlnk::getWeight(int v1, int v2)
 {
 	if (v1 != -1 && v2 != -1)
 	{
@@ -114,9 +110,9 @@ bool Graphlnk::insertVertex(const int vertex)
 	Nodeintable[numVertices].num = vertex;
 	numVertices++;
 	return true;
-}
+}*/
 
-bool Graphlnk::removeVertex(int v)
+/*bool Graphlnk::removeVertex(int v)
 {
 	if (numVertices == 1 || v<0 || v >= numVertices)return false;
 	Edge *p, *s, *t;
@@ -155,19 +151,19 @@ bool Graphlnk::removeVertex(int v)
 		p = p->link;
 	}
 	/*for (int k = 0; k < numVertices - 1; k++) {
-		Edge * cur1 = Nodeintable[k].adj;
-		if (getValue(k) > getValue(k + 1)) {
-			Edge * cur2 = Nodeintable[k+1].adj;
-			Edge * cur3 = cur1;
-			cur1 = cur2;
-			cur2 = cur3;
-			int cur = Nodeintable[k].num;
-			Nodeintable[k].num = Nodeintable[k + 1].num;
-			Nodeintable[k + 1].num = cur;
-		}
+	Edge * cur1 = Nodeintable[k].adj;
+	if (getValue(k) > getValue(k + 1)) {
+	Edge * cur2 = Nodeintable[k+1].adj;
+	Edge * cur3 = cur1;
+	cur1 = cur2;
+	cur2 = cur3;
+	int cur = Nodeintable[k].num;
+	Nodeintable[k].num = Nodeintable[k + 1].num;
+	Nodeintable[k + 1].num = cur;
+	}
 	}*/
-	
-	return true;
+
+	/*return true;
 }
 
 
@@ -195,88 +191,60 @@ bool Graphlnk::insertEdge(int v1, int v2, int cost)
 		return true;
 	}
 	return false;
-}
+}*/
 
-bool Graphlnk::removeEdge(int v1, int v2)
+/*bool Graphlnk::removeEdge(int v1, int v2)
 {
-	if (v1 != -1 && v2 != -1)
-	{
-		Edge *p = Nodeintable[v1].adj, *q = NULL, *s = p;
-		while (p != NULL && p->dest != v2)
-		{
-			q = p;
-			p = p->link;
-		}
-		if (p != NULL)
-		{
-			if (p == s)
-				Nodeintable[v1].adj = p->link;
-			else
-			{
-				q->link = p->link;
-			}
-			delete p;
-		}
-		else
-		{
-			return false;
-		}
-		p = Nodeintable[v2].adj;
-		q = NULL;
-		s = p;
-		while (p->dest != v1)
-		{
-			q = NULL;
-			s = p;
-		}
-		if (p == s)
-			Nodeintable[v2].adj = p->link;
-		else
-		{
-			q->link = p->link;
-		}
-		delete p;
-		return true;
-	}
-	return false;
-}
-
-ostream& operator << (ostream& out, Graphlnk & G)
+if (v1 != -1 && v2 != -1)
 {
-	int i, j;
-	cout << "    路由器个数为:" << G.NumberOfVertices() << endl;
-	cout << "    路由器边个数为:" << G.NunberOfEdges() << endl;
-	cout << "    路由器编号" << endl;
-	for (i = 0; i < G.NumberOfVertices(); i++) {
-		cout << "    "; string s;
-		cout << setw(10) << G.getValue(i) << endl;
-	}
-	cout << "\n";
-	cout << "路由器编号:   ";
-	for (i = 0; i < G.NumberOfVertices(); i++) {
-		cout << left << setw(10) << G.getValue(i);
-	}cout << endl;
-	for (i = 0; i < G.NumberOfVertices(); i++)
-	{
-		cout << "     " << G.getValue(i);
-		for (j = 0; j < G.NumberOfVertices(); j++)
-		{
-			if (G.getWeight(i, j) == maxWeight)
-				cout << right << setw(10) << "Max";
-			else
-				cout << setw(10) << G.getWeight(i, j);
-		}
-		cout << "\n";
-	}
-	cout << endl;
-	return out;
+Edge *p = Nodeintable[v1].adj, *q = NULL, *s = p;
+while (p != NULL && p->dest != v2)
+{
+q = p;
+p = p->link;
 }
+if (p != NULL)
+{
+if (p == s)
+Nodeintable[v1].adj = p->link;
+else
+{
+q->link = p->link;
+}
+delete p;
+}
+else
+{
+return false;
+}
+p = Nodeintable[v2].adj;
+q = NULL;
+s = p;
+while (p->dest != v1)
+{
+q = p;
+p = p->link;
+}
+if (p == s)
+Nodeintable[v2].adj = p->link;
+else
+{
+q->link = p->link;
+}
+delete p;
+numEdges--;
+return true;
+}
+return false;
+}*/
 
-void CreatGraph(Graphlnk &G, node N[], int n, RowColWeight E[], int e)
+ostream& operator << (ostream& out, Graphlnk & G);
+
+/*void CreatGraph(Graphlnk &G, node N[], int n, RowColWeight E[], int e)
 {	//在图G中插入n个顶点V和e条边E
 
 	//在图G中插入n个顶点
-	for (int i = 0; i < n; i++) {		
+	for (int i = 0; i < n; i++) {
 		G.insertVertex(N[i].num);
 	}
 
@@ -284,6 +252,4 @@ void CreatGraph(Graphlnk &G, node N[], int n, RowColWeight E[], int e)
 	for (int k = 0; k < e; k++) {
 		G.insertEdge(E[k].row, E[k].col, E[k].weight);
 	}
-}
-
-
+}*/

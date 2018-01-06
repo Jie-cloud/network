@@ -1,5 +1,4 @@
-#ifndef GRAPH_H
-#define GRAPH_H
+﻿#pragma once
 #include<iostream>
 #include<string>
 #include<iomanip>
@@ -42,4 +41,3 @@ protected:
 	int numEdges;
 	int numVertices;
 };
-#endif
