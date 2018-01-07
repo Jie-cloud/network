@@ -38,7 +38,6 @@ public:
 	bool insertEdge(int v1, int v2, int cost);		//插入边(v1,v2),权为cost
 	bool removeVertex(int v);					//删去顶点v和所有与v相关的边
 	bool removeEdge(int v1, int v2);				//删去边(v1,v2)
-	void shortest(int v);                    //输出v1路由表
 	Vertex * Nodeintable;
 };
 
