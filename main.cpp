@@ -8,5 +8,7 @@ void main() {
 	while (cover(g) != -1)
 	{
 		system("cls");
+
+
 	}
 }
