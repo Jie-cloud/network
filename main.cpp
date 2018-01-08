@@ -7,6 +7,7 @@ void main() {
 	init(g);
 	while (cover(g) != -1)
 	{
+
 		system("cls");
 
 
